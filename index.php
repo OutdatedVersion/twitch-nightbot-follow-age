@@ -33,7 +33,7 @@ $klein->respond($BASE, function ($request)
 });
 
 
-$klein->respond('/twitch/api/[:streamer]/following_since/[:user]/[:human_readable]?', function ($request)
+$klein->respond('/twitch/api/[:streamer]/follower_since/[:user]/[:human]?', function ($request)
 {
     $twitchResponse = Unirest\Request::get('https://api.twitch.tv/kraken/users/' . $request->user .  '/follows/channels/' . $request->streamer);
 
@@ -42,7 +42,7 @@ $klein->respond('/twitch/api/[:streamer]/following_since/[:user]/[:human_readabl
         // The Twitch API returns a 404 if a
         // user is not following the target
 
-        if ($request->human_readable)
+        if ($request->human)
             return $request->user . ' is not following ' . $request->streamer;
 
         return json_encode(array('state' => 'not_following',
@@ -51,22 +51,20 @@ $klein->respond('/twitch/api/[:streamer]/following_since/[:user]/[:human_readabl
                                  'request_length' => microtime() - $_['REQUEST_TIME']));
     }
 
-    $date;
-
     foreach (json_decode($twitchResponse->raw_body) as $var)
-            $date = $var->created_at;
+    {
+        $humanReadableDate = Carbon::parse($var)->toDayDateTimeString();
 
-    $humanReadableDate = Carbon::parse($date)->toDayDateTimeString();
+        if ($request->human)
+            return $humanReadableDate;
 
-    if ($request->human_readable)
-        return $humanReadableDate;
-
-    return json_encode(array('state' => 'following',
-                             'following_since' => $date,
-                             'following_since_human' => $humanReadableDate,
-                             'streamer' => $request->streamer,
-                             'user' => $request->user,
-                             'request_length' => microtime() - $_['REQUEST_TIME']));
+        return json_encode(array('state' => 'following',
+                                 'following_since' => $date,
+                                 'human_readable' => $humanReadableDate,
+                                 'streamer' => $request->streamer,
+                                 'user' => $request->user,
+                                 'request_length' => microtime() - $_['REQUEST_TIME']));
+    }
 });
 
 
