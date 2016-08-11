@@ -1,0 +1,16 @@
+{
+    "name": "outdatedversion/twitch-api-proxy",
+    "type": "project",
+    "require": {
+        "klein/klein": "^2.1",
+        "filp/whoops": "^2.1",
+        "mashape/unirest-php": "^3.0",
+        "nesbot/carbon": "^1.21"
+    },
+    "authors": [
+        {
+            "name": "OutdatedVersion",
+            "email": "outdated@outdatedversion.com"
+        }
+    ]
+}

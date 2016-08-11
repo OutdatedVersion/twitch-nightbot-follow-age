@@ -1,0 +1,3 @@
+# Composer modules
+vendor/
+composer.lock

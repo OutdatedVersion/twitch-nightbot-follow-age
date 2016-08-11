@@ -1,0 +1,4 @@
+# Redirect all requests to the PHP file
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . /twitch/api/index.php [L]
