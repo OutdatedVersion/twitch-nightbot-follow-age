@@ -4,4 +4,4 @@ A repo for one file? Yep. I don't wanna loose it again, ok? I don't PHPs often s
 no judgerino pwease. This was only made to use as an API for chat bots (Nightbot for example).
 
 
-¯\_(ツ)_/¯
+¯\\_(ツ)_/¯

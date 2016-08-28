@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 use Carbon\Carbon;
 
 $BASE = "/twitch/api/";
-$DEV = true;
+$DEV = false;
 
 if ($DEV)
 {
