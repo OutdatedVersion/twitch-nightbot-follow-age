@@ -1,5 +1,5 @@
 <?php
-// OutdatedVersion | 8/10/16 | Don't judge me! I don't PHP often.
+// OutdatedVersion | 8/10/16
 require_once 'vendor/autoload.php';
 
 use Carbon\Carbon;
@@ -25,11 +25,7 @@ $klein = new \Klein\Klein();
 
 $klein->respond($BASE, function ($request)
 {
-    return json_encode(array('service' => 'Twitch API Proxy',
-                             'version' => 0,
-                             'last_update' => '8-10-16',
-                             'author' => 'OutdatedVersion',
-                             'last_cried' => 'now'));
+    return json_encode(array('service' => 'Twitch API Proxy'));
 });
 
 
@@ -47,8 +43,7 @@ $klein->respond('/twitch/api/[:streamer]/follower_since/[:user]/[:human]?', func
 
         return json_encode(array('state' => 'not_following',
                                  'streamer' => $request->streamer,
-                                 'user' => $request->user,
-                                 'request_length' => microtime() - $_['REQUEST_TIME']));
+                                 'user' => $request->user));
     }
 
     foreach (json_decode($twitchResponse->raw_body) as $var)
@@ -60,10 +55,8 @@ $klein->respond('/twitch/api/[:streamer]/follower_since/[:user]/[:human]?', func
 
         return json_encode(array('state' => 'following',
                                  'following_since' => $date,
-                                 'human_readable' => $humanReadableDate,
                                  'streamer' => $request->streamer,
-                                 'user' => $request->user,
-                                 'request_length' => microtime() - $_['REQUEST_TIME']));
+                                 'user' => $request->user));
     }
 });
 
