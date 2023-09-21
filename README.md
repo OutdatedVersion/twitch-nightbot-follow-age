@@ -1,4 +1,4 @@
-# Twitch API Intermediate
+# Twitch API intermediate
 
-this is pretty old  
-it no longer has a purpose  
+Wrap traffic from the Twitch API and process it some. This was used by a Nightbot
+command in Twitch channels.
